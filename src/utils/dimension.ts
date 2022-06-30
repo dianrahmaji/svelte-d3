@@ -16,7 +16,7 @@ export class Margin {
   }
 
   verticalMargin(): number {
-    return this.top - this.bottom
+    return this.top + this.bottom
   }
 }
 
