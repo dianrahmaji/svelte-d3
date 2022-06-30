@@ -7,7 +7,7 @@
 
   import Axis from '../components/Axis.svelte'
   
-  const margin = new Margin(0, 40, 45, 40)
+  const margin = new Margin(5, 40, 45, 40)
   const dimension = new Dimension(420, window.innerHeight, margin)
   
   $: xAccessor = (d: Weather): string =>  timeParse("%Y-%m-%d")(d.date)
