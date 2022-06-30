@@ -30,6 +30,8 @@
       .range(["skyblue", "darkslategrey"])
 </script>
 
+<h1>Dew Point vs Relative Humidity in NYC every Month in 2018</h1>
+
 <svg width={dimension.width} height={dimension.height}>
   <g transform="translate({dimension.margin.left}, {dimension.margin.top})">
     {#each dataset as d (d.date)}
@@ -57,6 +59,11 @@
 </svg>
 
 <style lang="scss">
+  h1 {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
   svg {
     display: block;
     margin: 4rem auto 0;
