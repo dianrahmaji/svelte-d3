@@ -16,6 +16,7 @@
   $: dimension = new Dimension(width, width, margin)
   $: xAccessor = (d: Weather): Weather['dewPoint'] => d.dewPoint
   $: yAccessor = (d: Weather): Weather['humidity'] => d.humidity
+  $: colorAccessor = (d: Weather): Weather['cloudCover'] => d.cloudCover
   $: xScale = scaleLinear()
       .domain(extent(dataset, xAccessor))
       .range([0, dimension.boundedWidth()])
@@ -24,6 +25,9 @@
       .domain(extent(dataset, yAccessor))
       .range([dimension.boundedHeight(), 0])
       .nice()
+  $: colorScale = scaleLinear()
+      .domain(extent(dataset, colorAccessor))
+      .range(["skyblue", "darkslategrey"])
 </script>
 
 <svg width={dimension.width} height={dimension.height}>
@@ -33,6 +37,7 @@
         {r}
         cx={xScale(xAccessor(d))}
         cy={yScale(yAccessor(d))}
+        fill={colorScale(colorAccessor(d))}
       />
     {/each}
   </g>
@@ -55,9 +60,5 @@
   svg {
     display: block;
     margin: 4rem auto 0;
-
-    circle {
-      fill: cornflowerblue;
-    }
   }
 </style>
