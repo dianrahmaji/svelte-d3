@@ -3,28 +3,21 @@
   import { curveStep, extent, line, scaleLinear, scaleTime, timeParse } from 'd3'
   import { Margin, Dimension } from '../utils/dimension'
   import dataset from '../../public/my_weather_data.json'
+  import type { Weather } from '../types'
 
   import Axis from '../components/Axis.svelte'
-
-  import type { Weather } from '../types'
   
-  // dimensions
   const margin = new Margin(0, 40, 45, 40)
   const dimension = new Dimension(420, window.innerHeight, margin)
   
-  // accessors
   $: xAccessor = (d: Weather): string =>  timeParse("%Y-%m-%d")(d.date)
   $: yAccessor = (d: Weather): Weather['temperatureMax'] => d.temperatureMax
-  
-  // scales
   $: xScale = scaleTime()
       .domain(extent(dataset, xAccessor))
       .range([0, dimension.boundedWidth()])
   $: yScale = scaleLinear()
       .domain(extent(dataset, yAccessor))
       .range([dimension.boundedHeight(), 0])  
-  
-  // path
   $: d = line()
       .x(d => xScale(xAccessor(d)))
       .y(d => yScale(yAccessor(d)))
