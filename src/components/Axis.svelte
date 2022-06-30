@@ -4,17 +4,16 @@
   import type { Dimension } from 'src/utils/dimension'
   import type { Position } from '../types'
 
-
   export let label: string
   export let scale: string
   export let position: Position
   export let dimension: Dimension
 
+  let x: number
+  let y: number
   let g: SVGElement
   let axisTransform: string
   let labelTransform: string
-  let x: number
-  let y: number
 
   $: {
     select(g).selectAll("*").remove()
@@ -36,10 +35,6 @@
     }
 
     select(g).call(axis)
-  }
-
-  $: {
-
   }
 </script>
 
